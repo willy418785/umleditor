@@ -23,8 +23,8 @@ public class CanvasHandler extends MouseAdapter{
         switch(App.appState){
             case SELECT:
             // select obj. been clicked
-            Utils.SelectGivenObjList(App.objs, false);
-            Utils.SelectGivenComList(App.compositions, false);
+            Utils.setSelcectedGivenSelectables(App.objs, false);
+            Utils.setSelcectedGivenSelectables(App.compositions, false);
             List<BasicObject> selectedObjs = Utils.getObjsInsideGivenRegion(x, y, -1, -1);
             if(selectedObjs.size()>0){
                 // ignore if no obj. is clicked
@@ -69,8 +69,8 @@ public class CanvasHandler extends MouseAdapter{
         switch(App.appState){
             case SELECT:
             // moving obj. been clicked
-            Utils.SelectGivenObjList(App.objs, false);
-            Utils.SelectGivenComList(App.compositions, false);
+            Utils.setSelcectedGivenSelectables(App.objs, false);
+            Utils.setSelcectedGivenSelectables(App.compositions, false);
             selectedObjs = Utils.getObjsInsideGivenRegion(x, y, -1, -1);
             if(selectedObjs.size() > 0){
                 // ignore if no obj. is clicked
@@ -110,8 +110,8 @@ public class CanvasHandler extends MouseAdapter{
                 // moving every obj. selected by user
                 int translateX = endX - x;
                 int translateY = endY - y;
-                List<BasicObject> selectedObjs = Utils.getSelectedGivenObjList(App.objs);
-                for (BasicObject selectedObj: selectedObjs){
+                List<? extends ISelectable> selecteds = Utils.getSelectedGivenSelectables(App.objs);
+                for (BasicObject selectedObj: (List<BasicObject>)selecteds){
                     selectedObj.setPosition(selectedObj.getPositionX() + translateX, selectedObj.getPositionY() + translateY);
                     for(Line line: App.lines){
                         if(line.isGivenObjEndPoint(selectedObj)){
@@ -122,10 +122,10 @@ public class CanvasHandler extends MouseAdapter{
             }
             else{
                 // select objs. within an rectangular area
-                Utils.SelectGivenObjList(App.objs, false);
-                Utils.SelectGivenComList(App.compositions, false);
+                Utils.setSelcectedGivenSelectables(App.objs, false);
+                Utils.setSelcectedGivenSelectables(App.compositions, false);
                 List<BasicObject> selectedObjs = Utils.getObjsInsideGivenRegion(x, y, endX, endY);
-                Utils.SelectGivenObjList(selectedObjs, true);
+                Utils.setSelcectedGivenSelectables(selectedObjs, true);
                 for (BasicObject selectedObj: selectedObjs){
                     Utils.SelectCompositionGivenObj(selectedObj, true);
                 }

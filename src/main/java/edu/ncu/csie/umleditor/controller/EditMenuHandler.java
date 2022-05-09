@@ -29,7 +29,7 @@ public class EditMenuHandler implements ActionListener{
             JOptionPane popUpDialog = new JOptionPane();
             String input = popUpDialog.showInputDialog(workingFrame, "Rename");
             if(input!=null){
-                List<BasicObject> selectedObjs = Utils.getSelectedGivenObjList(App.objs);
+                List<BasicObject> selectedObjs = (List<BasicObject>)Utils.getSelectedGivenSelectables(App.objs);
                 for (BasicObject obj: selectedObjs){
                     obj.setText(input);
                 }
@@ -40,7 +40,7 @@ public class EditMenuHandler implements ActionListener{
             case GROUP:
             // group all composition which are selected by user
             System.out.println("group");
-            coms = Utils.getSelectedGivenComList(App.compositions);
+            coms = (List<Composition>)Utils.getSelectedGivenSelectables(App.compositions);
             
             if (coms.size() > 1){
                 // only perform group op. when mutiple compositions are selected
@@ -58,7 +58,7 @@ public class EditMenuHandler implements ActionListener{
             case UNGROUP:
             // upgroup composition into mutiple separate compostions
             System.out.println("ungroup");
-            coms = Utils.getSelectedGivenComList(App.compositions);
+            coms = (List<Composition>)Utils.getSelectedGivenSelectables(App.compositions);
             for(Composition com: coms){
                 if (com.isRoot() && !com.isLeaf()){
                     // only perform ungroup op. when target is a root and not a leaf(composition with only one obj)

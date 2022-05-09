@@ -5,36 +5,20 @@ import edu.ncu.csie.umleditor.App;
 import edu.ncu.csie.umleditor.model.*;
 import java.lang.Math;
 public class Utils {
-    public static void SelectGivenObjList(List<BasicObject> objs, boolean bool){
-        for (BasicObject obj: objs){
-            obj.setSelected(bool);
+    public static void setSelcectedGivenSelectables(List<? extends ISelectable> selectables, boolean bool){
+        for (ISelectable selectable: selectables){
+            selectable.setSelected(bool);
         }
     }
 
-    public static List<BasicObject> getSelectedGivenObjList(List<BasicObject> objs){
-        List<BasicObject> selectedObjs = new ArrayList<BasicObject>();
-        for(BasicObject obj: objs){
-            if(obj.getSelected()){
-                selectedObjs.add(obj);
+    public static List<? extends ISelectable> getSelectedGivenSelectables(List<? extends ISelectable> selectables){
+        List<ISelectable> selecteds = new ArrayList<ISelectable>();
+        for(ISelectable selectable: selectables){
+            if(selectable.getSelected()){
+                selecteds.add(selectable);
             }
         }
-        return selectedObjs;
-    }
-
-    public static List<Composition> getSelectedGivenComList(List<Composition> coms){
-        List<Composition> selectedComs = new ArrayList<Composition>();
-        for(Composition com: coms){
-            if(com.getSelected()){
-                selectedComs.add(com);
-            }
-        }
-        return selectedComs;
-    }
-
-    public static void SelectGivenComList(List<Composition> coms, boolean bool){
-        for (Composition com: coms){
-            com.setSelected(bool);
-        }
+        return selecteds;
     }
 
     public static void SelectCompositionGivenObj(BasicObject obj, boolean bool){
@@ -42,7 +26,7 @@ public class Utils {
         for (Composition com: App.compositions){
             List<BasicObject> contents = com.getLeafsContents();
             if(contents.contains(obj)){
-                Utils.SelectGivenObjList(contents, bool);
+                Utils.setSelcectedGivenSelectables(contents, bool);
                 com.setSelected(bool);
             }
         }
