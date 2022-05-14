@@ -12,7 +12,12 @@ public abstract class Line extends Shape{
     Line(){
         super();
     }
-    
+    Line(BasicObject startObj, BasicObject endObj){
+        super();
+        start = startObj;
+        end = endObj;
+        updateEndPoint();
+    }
     public BasicObject getStart(){
         return start;
     }
@@ -99,8 +104,8 @@ public abstract class Line extends Shape{
     
     public void paintPorts(Graphics g){ 
         //paint ports
-        paintPortAtGivenPosAndCardinal(g, x, y, startPortPos);
-        paintPortAtGivenPosAndCardinal(g, endX, endY, endPortPos);
+        //paintPortAtGivenPosAndCardinal(g, x, y, startPortPos);
+        //paintPortAtGivenPosAndCardinal(g, endX, endY, endPortPos);
     }
     private void paintPortAtGivenPosAndCardinal(Graphics g, int x, int y, Cardinal cardinal){
         int leftPortX = x-portWidth, leftPortY = y-portWidth/2;

@@ -4,6 +4,9 @@ import java.awt.Graphics;
 public class AssociateLine extends Line{
     private double arrowAngle = 60;
     private double arrowLength = 20;
+    public AssociateLine(BasicObject startObj, BasicObject endObj){
+        super(startObj, endObj);
+    }
     public void paintHead(Graphics g){
         double vecLen = Math.sqrt(Math.pow((endX - x), 2) + Math.pow((endY - y), 2));
         double radiant = Math.toRadians(90 + arrowAngle);

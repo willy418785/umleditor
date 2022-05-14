@@ -4,6 +4,9 @@ import java.awt.Color;
 public class GeneralizeLine extends Line{
     private double arrowAngle = 60;
     private double arrowLength = 20;
+    public GeneralizeLine(BasicObject startObj, BasicObject endObj){
+        super(startObj, endObj);
+    }
     public void paintHead(Graphics g){
         double vecLen = Math.sqrt(Math.pow((endX - x), 2) + Math.pow((endY - y), 2));
         double radiant = Math.toRadians(90 + arrowAngle);
