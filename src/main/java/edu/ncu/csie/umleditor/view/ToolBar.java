@@ -10,7 +10,7 @@ import java.util.*;
 public class ToolBar extends JPanel{
     private Map<ButtonState, AbstractButton> buttonsMap = new EnumMap<ButtonState, AbstractButton>(ButtonState.class);  // store all button instances in a Map
     private ButtonGroup buttonsGroup;   // all buttons belong to a button group
-    public ToolBar(){
+    public ToolBar(Canvas canvas){
         super();
         // initialize style and layout of tool bar
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -25,13 +25,12 @@ public class ToolBar extends JPanel{
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);
             btn.setPreferredSize(new Dimension(150,30));
             btn.setMaximumSize(new Dimension(150,30));
-            btn.addActionListener(new ButtonHandler(state));
+            btn.addActionListener(new ButtonHandler(canvas, state));
 
             // add this button to Map and button group
             buttonsMap.put(state, btn);
             buttonsGroup.add(btn);
         }
-        buttonsMap.get(App.appState).setSelected(true);
     }
 }
 

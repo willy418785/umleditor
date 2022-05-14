@@ -1,18 +1,22 @@
 package edu.ncu.csie.umleditor.view;
 import java.awt.Dimension;
+import java.util.*;
+
 import javax.swing.*;
+
+import edu.ncu.csie.umleditor.model.*;
 
 public class UI{
     private JFrame window;
     private JPanel toolBar;
-    private JPanel canvas;
+    private Canvas canvas;
     private JMenuBar menu;
-    public UI(String windowName){
+    public UI(String windowName){        
         window = new JFrame();
 
         canvas = new Canvas();
 
-        toolBar = new ToolBar();
+        toolBar = new ToolBar(canvas);
 
         menu = new Menu(window, canvas);
         
