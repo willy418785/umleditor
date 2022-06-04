@@ -13,7 +13,7 @@ public class UngroupHandler extends EditHandler{
     public void actionPerformed(ActionEvent e) {
         // upgroup composition into mutiple separate compostions
         System.out.println("ungroup");
-        List<Composition> selectedComs = (List<Composition>)Utils.getSelectedGivenSelectables(canvas.coms);
+        List<Composition> selectedComs = (List<Composition>)Selectable.getSelectables(canvas.coms);
         for(Composition com: selectedComs){
             if (com.isRoot() && !com.isLeaf()){
                 // only perform ungroup op. when target is a root and not a leaf(composition with only one obj)

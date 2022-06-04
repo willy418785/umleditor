@@ -18,7 +18,7 @@ public class RenameHandler extends EditHandler{
         // show up a pop-up window for user to change selected objs' names
         String input = JOptionPane.showInputDialog(workingFrame, "Rename");
         if(input!=null){
-            List<BasicObject> selectedObjs = (List<BasicObject>)Utils.getSelectedGivenSelectables(canvas.objs);
+            List<BasicObject> selectedObjs = (List<BasicObject>)Selectable.getSelectables(canvas.objs);
             for (BasicObject obj: selectedObjs){
                 obj.setText(input);
             }

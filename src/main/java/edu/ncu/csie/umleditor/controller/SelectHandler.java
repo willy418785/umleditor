@@ -3,7 +3,6 @@ import java.awt.event.*;
 import java.util.*;
 
 import edu.ncu.csie.umleditor.model.*;
-import edu.ncu.csie.umleditor.util.Utils;
 import edu.ncu.csie.umleditor.view.*;
 
 public class SelectHandler extends CanvasHandler{
@@ -17,16 +16,16 @@ public class SelectHandler extends CanvasHandler{
         x = e.getX();
         y = e.getY();
         // select obj. been clicked
-        Utils.setSelcectedGivenSelectables(canvas.objs, false);
-        Utils.setSelcectedGivenSelectables(canvas.coms, false);
-        List<BasicObject> selectedObjs = Utils.getObjsInsideGivenRegion(x, y, -1, -1, canvas.objs);
+        Selectable.setSelectables(canvas.objs, false);
+        Selectable.setSelectables(canvas.coms, false);
+        List<BasicObject> selectedObjs = BasicObject.getInsideObjs(x, y, canvas.objs);
         if(selectedObjs.size()>0){
             // ignore if no obj. is clicked
             // if mutiple objs. clicked, only select the obj on top
             // also select the composition that possesses this selected obj.
-            BasicObject objWithHighestDepth = Utils.getObjWithHighestDepthGivenObjs(selectedObjs);
+            BasicObject objWithHighestDepth = BasicObject.getObjWithHighestDepthGivenObjs(selectedObjs);
             objWithHighestDepth.setSelected(true);
-            Utils.SelectCompositionGivenObj(objWithHighestDepth, true, canvas.coms);
+            Composition.selectCompositionGivenObj(objWithHighestDepth, true, canvas.coms);
         }
         // repaint the canvas when user click the mouse
         canvas.repaint();
@@ -37,18 +36,18 @@ public class SelectHandler extends CanvasHandler{
         y = e.getY();
         List<BasicObject> selectedObjs;
         // moving obj. been clicked
-        Utils.setSelcectedGivenSelectables(canvas.objs, false);
-        Utils.setSelcectedGivenSelectables(canvas.coms, false);
-        selectedObjs = Utils.getObjsInsideGivenRegion(x, y, -1, -1, canvas.objs);
+        Selectable.setSelectables(canvas.objs, false);
+        Selectable.setSelectables(canvas.coms, false);
+        selectedObjs = BasicObject.getInsideObjs(x, y, canvas.objs);
         if(selectedObjs.size() > 0){
             // ignore if no obj. is clicked
             // if mutiple objs. clicked, only select the obj on top
             // also select the composition that possesses this selected obj
             // move this obj.
             isDraging = true;
-            BasicObject objWithHighestDepth = Utils.getObjWithHighestDepthGivenObjs(selectedObjs);
+            BasicObject objWithHighestDepth = BasicObject.getObjWithHighestDepthGivenObjs(selectedObjs);
             objWithHighestDepth.setSelected(true);
-            Utils.SelectCompositionGivenObj(objWithHighestDepth, true, canvas.coms);
+            Composition.selectCompositionGivenObj(objWithHighestDepth, true, canvas.coms);
         }
         canvas.repaint();
     }
@@ -61,7 +60,7 @@ public class SelectHandler extends CanvasHandler{
             // moving every obj. selected by user
             int translateX = endX - x;
             int translateY = endY - y;
-            List<? extends ISelectable> selecteds = Utils.getSelectedGivenSelectables(canvas.objs);
+            List<? extends Selectable> selecteds = Selectable.getSelectables(canvas.objs);
             for (BasicObject selectedObj: (List<BasicObject>)selecteds){
                 selectedObj.setPosition(selectedObj.getPositionX() + translateX, selectedObj.getPositionY() + translateY);
                 for(Line line: canvas.lines){
@@ -73,12 +72,12 @@ public class SelectHandler extends CanvasHandler{
         }
         else{
             // select objs. within an rectangular area
-            Utils.setSelcectedGivenSelectables(canvas.objs, false);
-            Utils.setSelcectedGivenSelectables(canvas.coms, false);
-            List<BasicObject> selectedObjs = Utils.getObjsInsideGivenRegion(x, y, endX, endY, canvas.objs);
-            Utils.setSelcectedGivenSelectables(selectedObjs, true);
+            Selectable.setSelectables(canvas.objs, false);
+            Selectable.setSelectables(canvas.coms, false);
+            List<BasicObject> selectedObjs = BasicObject.getInsideObjs(x, y, endX, endY, canvas.objs);
+            Selectable.setSelectables(selectedObjs, true);
             for (BasicObject selectedObj: selectedObjs){
-                Utils.SelectCompositionGivenObj(selectedObj, true, canvas.coms);
+                Composition.selectCompositionGivenObj(selectedObj, true, canvas.coms);
             }
         }
         isDraging = false;

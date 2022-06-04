@@ -3,7 +3,6 @@ import java.awt.event.*;
 import java.util.*;
 
 import edu.ncu.csie.umleditor.model.*;
-import edu.ncu.csie.umleditor.util.Utils;
 import edu.ncu.csie.umleditor.view.*;
 
 public abstract class LineHandler extends CanvasHandler{
@@ -18,10 +17,10 @@ public abstract class LineHandler extends CanvasHandler{
         x = e.getX();
         y = e.getY();
         List<BasicObject> selectedObjs; 
-        selectedObjs = Utils.getObjsInsideGivenRegion(x, y, -1, -1, canvas.objs);
+        selectedObjs = BasicObject.getInsideObjs(x, y, canvas.objs);
         if(selectedObjs.size() > 0){
             isDraging = true;
-            BasicObject newLineStartingObj = Utils.getObjWithHighestDepthGivenObjs(selectedObjs);
+            BasicObject newLineStartingObj = BasicObject.getObjWithHighestDepthGivenObjs(selectedObjs);
             objConstructingLine = newLineStartingObj;
         }
         canvas.repaint();
@@ -32,10 +31,10 @@ public abstract class LineHandler extends CanvasHandler{
         endX = e.getX();
         endY = e.getY();
         if(isDraging){
-            List<BasicObject> selectedObjs = Utils.getObjsInsideGivenRegion(endX, endY, -1, -1, canvas.objs);
+            List<BasicObject> selectedObjs = BasicObject.getInsideObjs(endX, endY, canvas.objs);
             if(selectedObjs.size() > 0){
                 // create a associate line of end obj. selected by user
-                BasicObject newLineEndingObj = Utils.getObjWithHighestDepthGivenObjs(selectedObjs);
+                BasicObject newLineEndingObj = BasicObject.getObjWithHighestDepthGivenObjs(selectedObjs);
                 if (objConstructingLine != newLineEndingObj) {
                     Line newLine = newLine(objConstructingLine, newLineEndingObj);
                     canvas.lines.add(newLine);

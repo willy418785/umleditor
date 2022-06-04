@@ -12,7 +12,7 @@ public class GroupHandler extends EditHandler{
     }
     public void actionPerformed(ActionEvent e) {
         System.out.println("group");
-        List<Composition> selectedComs = (List<Composition>)Utils.getSelectedGivenSelectables(canvas.coms);
+        List<Composition> selectedComs = (List<Composition>)Selectable.getSelectables(canvas.coms);
         
         if (selectedComs.size() > 1){
             // group all composition which are selected by user
