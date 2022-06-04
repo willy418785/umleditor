@@ -14,14 +14,14 @@ public abstract class ObjectHandler extends CanvasHandler{
         // TODO Auto-generated method stub
         x = e.getX();
         y = e.getY();
-            // create a uml object
-            // also deen as a composition of its own
-            BasicObject obj = newObject();
-            obj.setPosition(x, y);
-            canvas.objs.add(obj);
-            obj.setDepth(canvas.objs.indexOf(obj));
-            Composition com = new Composition(obj);
-            canvas.coms.add(com);
+        // create a uml object
+        // also deen as a composition of its own
+        BasicObject obj = newObject();
+        obj.setPosition(x, y);
+        canvas.objs.add(obj);
+        obj.setDepth(canvas.objs.indexOf(obj));
+        Composition com = new Composition(obj);
+        canvas.coms.add(com);
         // repaint the canvas when user click the mouse
         canvas.repaint();
     }
