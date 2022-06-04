@@ -3,16 +3,19 @@ package edu.ncu.csie.umleditor.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Composition implements ISelectable{
+public class Composition extends Selectable{
     private List<BasicObject> contents = null;
     private Composition parent = null;
     private List<Composition> childs = null;
-    private boolean isSelected = false;
-    public Composition(){}
+    public Composition(){
+        super();
+    }
     public Composition(List<BasicObject> objs){
+        super();
         contents = objs;
     }
     public Composition(BasicObject obj){
+        super();
         contents = new ArrayList<BasicObject>();
         contents.add(obj);
     }
@@ -31,12 +34,6 @@ public class Composition implements ISelectable{
         else{
             return null;
         }
-    }
-    public void setSelected(boolean bool){
-        isSelected = bool;
-    }    
-    public boolean getSelected(){
-        return isSelected;
     }
     public Composition getParent(){
         return parent;
@@ -69,6 +66,17 @@ public class Composition implements ISelectable{
                 allChildsContents.addAll(childContents);
             }
             return allChildsContents;
+        }
+    }
+
+    public static void selectCompositionGivenObj(BasicObject obj, boolean bool, List<Composition> coms){
+        // if the given obj belongs to an only composition, set the isSelected value of this composition.
+        for (Composition com: coms){
+            List<BasicObject> contents = com.getLeafsContents();
+            if(contents.contains(obj)){
+                Selectable.setSelectables(contents, bool);
+                com.setSelected(bool);
+            }
         }
     }
 }

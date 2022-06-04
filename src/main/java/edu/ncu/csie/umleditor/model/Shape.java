@@ -1,14 +1,13 @@
 package edu.ncu.csie.umleditor.model;
 
-
-public abstract class Shape implements IPaintable, ISelectable{
-    protected boolean isSelected = false;
+public abstract class Shape extends Selectable implements IPaintable{
     protected int x = 0;
     protected int y = 0;
     protected int depth = 0;
     protected int portWidth = 6;
 
     Shape(){
+        super();
     }
     
     public void setPosition(int x, int y){
@@ -27,11 +26,4 @@ public abstract class Shape implements IPaintable, ISelectable{
     public int getDepth(){
         return depth;
     }
-    public void setSelected(boolean bool){
-        isSelected = bool;
-    }    
-    public boolean getSelected(){
-        return isSelected;
-    }
-
 }
