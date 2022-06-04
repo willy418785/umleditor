@@ -19,6 +19,6 @@ public class ButtonHandler implements ActionListener{
         for (MouseListener listener : canvas.getMouseListeners()) {
             canvas.removeMouseListener(listener);
         }
-        canvas.addMouseListener(canvas.handlerMap.get(state));
+        canvas.addMouseListener(new CanvasHandlerFactory(canvas).createCanvasHandler(state));
     }
 }
