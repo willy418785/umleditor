@@ -84,3 +84,7 @@ target/classes/edu/ncu/csie/umleditor/view/Menu.class
 target/classes/edu/ncu/csie/umleditor/view/ToolBar.class
 target/classes/edu/ncu/csie/umleditor/view/UI.class
 target/test-classes/edu/ncu/csie/umleditor/AppTest.class
+target/classes/edu/ncu/csie/umleditor/controller/CanvasHandlerFactory.class
+target/classes/edu/ncu/csie/umleditor/controller/EditHandlerFactory.class
+target/classes/edu/ncu/csie/umleditor/controller/MenuFactory.class
+target/classes/edu/ncu/csie/umleditor/model/Selectable.class
